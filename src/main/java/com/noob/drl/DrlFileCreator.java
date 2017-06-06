@@ -76,20 +76,27 @@ public class DrlFileCreator {
 			int size = filterList.size();
 			for (int i = 0; i < size; i++) {
 				Rule rule = filterList.get(i);
-				append(builder, " map.get(\"", rule.getCode(), "\")");
 				String lower = rule.getLimitVal()[0];
-				if (rule.getOp().equals(OP.GT)) {
-					append(builder, " > ", lower);
-
-				} else if (rule.getOp().equals(OP.EQ)) {
-					append(builder, " == ", lower);
-
-				} else if (rule.getOp().equals(OP.LT)) {
-					append(builder, " < ", lower);
-
-				} else if (rule.getOp().equals(OP.RANGE)) {
+				if (rule.getOp().equals(OP.RANGE)) {
 					String upper = rule.getLimitVal()[1];
-					append(builder, " >= ", lower, " && " + " map.get(\"", rule.getCode(), "\")", " <= ", upper);
+					append(builder, " ( map.get(\"", rule.getCode(), "\")");
+
+					append(builder, " >= ", lower, " && " + " map.get(\"", rule.getCode(), "\")", " <= ", upper, " )");
+				} else {
+					append(builder, " map.get(\"", rule.getCode(), "\")");
+					if (rule.getOp().equals(OP.GT)) {
+
+						append(builder, " > ", lower);
+
+					} else if (rule.getOp().equals(OP.EQ)) {
+
+						append(builder, " == ", lower);
+
+					} else if (rule.getOp().equals(OP.LT)) {
+
+						append(builder, " < ", lower);
+
+					}
 				}
 
 				if (i < size - 1) {
