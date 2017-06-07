@@ -32,8 +32,28 @@ public class RuleEngineImpl implements IRuleEngine {
 	private RuleBase ruleBase = RuleBaseFacatory.getRuleBase();
 	private boolean debug = false;
 
+	/*private static KnowledgeBuilder kb = KnowledgeBuilderFactory.newKnowledgeBuilder();
+	private static KnowledgeBase kBase = KnowledgeBaseFactory.newKnowledgeBase();
+
+	static {
+		try {
+			Reader reader = new InputStreamReader(CouponTicketRule.class.getClassLoader()
+					.getResourceAsStream("rules/Radom_money.drl"), "UTF-8");
+			kb.add(ResourceFactory.newReaderResource(reader), ResourceType.DRL);
+		} catch (Exception e) {
+			kb.add(ResourceFactory.newClassPathResource("rules/Radom_money.drl"), ResourceType.DRL);
+		}
+		KnowledgeBuilderErrors errors = kb.getErrors();
+		System.out.println(errors.toString());
+
+		kBase.addKnowledgePackages(kb.getKnowledgePackages());
+
+	}*/
+
 	public void initEngine() {
 		try {
+			
+			
 			PackageBuilder backageBuilder = getPackageBuilderFromDrlFile(DrlFileCreator.DIRECTORY);
 			ruleBase.addPackages(backageBuilder.getPackages());
 		} catch (DroolsParserException e) {

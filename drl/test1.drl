@@ -1,7 +1,7 @@
 package drl; 
 import com.noob.fact.JudgeModel;
 rule "ruleTest: test rule1"
-when $judgeResult: JudgeModel(  map.get("code1") > 3 ||  map.get("code2") == 4 ||  map.get("code3") < 5 ||  ( map.get("code4") >= 1 &&  map.get("code4") <= 10 ))
+when $judgeResult: JudgeModel(  Integer.parseInt(map.get("code1")) > 3 ||  Integer.parseInt(map.get("code2")) == 4 ||  Integer.parseInt(map.get("code3")) < 5 ||  (Integer.parseInt( map.get("code4")) >= 1 &&  Integer.parseInt(map.get("code4") ) <= 10 ))
 then
 System.out.print("test rule1");
 $judgeResult.setSuccess(true);

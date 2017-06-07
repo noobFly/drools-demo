@@ -79,11 +79,11 @@ public class DrlFileCreator {
 				String lower = rule.getLimitVal()[0];
 				if (rule.getOp().equals(OP.RANGE)) {
 					String upper = rule.getLimitVal()[1];
-					append(builder, " ( map.get(\"", rule.getCode(), "\")");
+					append(builder, " (Integer.parseInt( map.get(\"", rule.getCode(), "\"))");
 
-					append(builder, " >= ", lower, " && " + " map.get(\"", rule.getCode(), "\")", " <= ", upper, " )");
+					append(builder, " >= ", lower, " && " + " Integer.parseInt(map.get(\"", rule.getCode(), "\") )", " <= ", upper, " )");
 				} else {
-					append(builder, " map.get(\"", rule.getCode(), "\")");
+					append(builder, " Integer.parseInt(map.get(\"", rule.getCode(), "\"))");
 					if (rule.getOp().equals(OP.GT)) {
 
 						append(builder, " > ", lower);
